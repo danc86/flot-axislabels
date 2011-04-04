@@ -46,14 +46,16 @@ Released under the GPLv3 license by Xuan Luo, September 2010.
                         // canvas text
                         if (!opts.axisLabelFontSizePixels)
                             opts.axisLabelFontSizePixels = 13;
+                        if (!opts.axisLabelPaddingPixels)
+                            opts.axisLabelPaddingPixels = 7;
                         if (!opts.fillStyle)
                             opts.fillStyle = 'black';
                         if (!opts.axisLabelFontFamily)
                             opts.axisLabelFontFamily = 'sans-serif';
                         // since we currently always display x as horiz.
                         // and y as vertical, we only care about the height
-                        w = opts.axisLabelFontSizePixels;
-                        h = opts.axisLabelFontSizePixels;
+                        w = opts.axisLabelFontSizePixels + opts.axisLabelPaddingPixels;
+                        h = opts.axisLabelFontSizePixels + opts.axisLabelPaddingPixels;
 
                     } else {
                         // HTML text
@@ -92,13 +94,13 @@ Released under the GPLv3 license by Xuan Luo, September 2010.
                         ctx.font = opts.axisLabelFontSizePixels + 'px ' +
                                 opts.axisLabelFontFamily;
                         var width = ctx.measureText(opts.axisLabel).width;
-                        var height = opts.axisLabelFontSizePixels;
+                        var height = opts.axisLabelFontSizePixels + opts.axisLabelPaddingPixels;
                         var x, y;
                         if (axisName.charAt(0) == 'x') {
                             x = plot.getPlotOffset().left + plot.width()/2 - width/2;
                             y = plot.getCanvas().height;
                         } else {
-                            x = height * 0.72;
+                            x = height - opts.axisLabelPaddingPixels;
                             y = plot.getPlotOffset().top + plot.height()/2 + width/2;
                         }
                         ctx.fillStyle = opts.fillStyle;
